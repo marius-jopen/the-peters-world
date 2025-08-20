@@ -251,7 +251,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <div className="border border-gray-200 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleSection('details')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between "
                   >
                     <span className="font-medium">Details</span>
                     <div className="transition-transform duration-300 ease-out">
@@ -293,7 +293,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <div className="border border-gray-200 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleSection('specs')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between "
                   >
                     <span className="font-medium">Specifications</span>
                     <div className="transition-transform duration-300 ease-out">
@@ -336,7 +336,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <div className="border border-gray-200 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleSection('shipping')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between "
                   >
                     <span className="font-medium">Shipping</span>
                     <div className="transition-transform duration-300 ease-out">
