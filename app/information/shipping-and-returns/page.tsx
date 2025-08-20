@@ -56,8 +56,8 @@ export default function ShippingAndReturnsPage() {
           <section>
             <h2>Contact Us</h2>
             <p>
-              If you have any questions about shipping or returns, please don't hesitate 
-              to <a href="/information/contact">contact us</a>. We're here to help!
+              If you have any questions about shipping or returns, please don&apos;t hesitate 
+              to <a href="/information/contact">contact us</a>. We&apos;re here to help!
             </p>
           </section>
         </Prose>

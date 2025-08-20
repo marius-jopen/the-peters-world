@@ -14,7 +14,7 @@ export default function WorldPage() {
           Meet the World of Peter
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto font-light pt-4 pb-12 animate-in slide-in-from-top-6 duration-700 delay-200">
-          A collection of whimsical characters from Peter's imagination.
+          A collection of whimsical characters from Peter&apos;s imagination.
         </p>
       </div>
 

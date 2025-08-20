@@ -86,7 +86,7 @@ export function LegalModal({ isOpen, onClose }: LegalModalProps) {
                 Terms of Service
               </h3>
               <p className="mb-3">
-                By using Peter's World, you agree to these terms. All products are sold as-is. 
+                By using Peter&apos;s World, you agree to these terms. All products are sold as-is. 
                 We reserve the right to modify these terms at any time.
               </p>
               <p>

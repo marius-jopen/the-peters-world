@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
+import Link from 'next/link'
 
 export default function FAQPage() {
   const [openFaqs, setOpenFaqs] = useState<Set<number>>(new Set())
@@ -105,12 +106,12 @@ export default function FAQPage() {
             <p className="text-gray-600 mb-4">
               If you couldn&apos;t find the answer you&apos;re looking for, please don&apos;t hesitate to contact us.
             </p>
-            <a 
+            <Link 
               href="/information/contact"
               className="btn-primary inline-block transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               Contact Us
-            </a>
+            </Link>
           </div>
         </Prose>
       </div>
