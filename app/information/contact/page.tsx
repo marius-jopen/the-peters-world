@@ -68,7 +68,7 @@ export default function ContactPage() {
             </p>
           </section>
           
-          <div className="mt-12 p-6 bg-gray-50 rounded-2xl text-center">
+          <div className="mt-12 p-6 border border-/60 rounded-2xl text-center">
             <h2 className="text-lg font-semibold text-[#131313] mb-3">
               Ready to Shop?
             </h2>

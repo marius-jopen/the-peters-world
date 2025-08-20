@@ -66,7 +66,7 @@ export default function FAQPage() {
             <div key={index} className="border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-300 transition-colors duration-200">
               <button
                 onClick={() => toggleFaq(index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                className="w-full px-6 py-4 text-left flex items-center justify-between transition-colors duration-200"
               >
                 <h2 className="text-xl font-semibold text-[#131313] pr-4">
                   {faq.question}
@@ -99,7 +99,7 @@ export default function FAQPage() {
             </div>
           ))}
           
-          <div className="mt-12 p-6 bg-gray-50 rounded-2xl text-center">
+          <div className="mt-12 p-6 border border-/60 rounded-2xl text-center">
             <h2 className="text-lg font-semibold text-[#131313] mb-3">
               Still have questions?
             </h2>
