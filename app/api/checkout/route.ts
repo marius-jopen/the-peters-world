@@ -14,16 +14,35 @@ export async function POST(request: NextRequest) {
     }
 
     // Get the base URL for converting relative image paths to absolute URLs
-    const baseUrl = process.env.VERCEL_URL 
+    let baseUrl = process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
       : process.env.NEXTAUTH_URL || 'http://localhost:3000'
+    
+    // Fallback for development
+    if (!baseUrl || baseUrl === 'http://localhost:3000') {
+      baseUrl = 'http://localhost:3000'
+    }
+    
+    console.log('Base URL for images:', baseUrl) // Debug log
 
     // Create line items for Stripe
     const lineItems = items.map(item => {
       // Convert relative image path to absolute URL
-      const imageUrl = item.image.startsWith('http') 
-        ? item.image 
-        : `${baseUrl}${item.image}`
+      let imageUrl = item.image
+      
+      if (!imageUrl.startsWith('http')) {
+        // Ensure the image path starts with a slash
+        const imagePath = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`
+        imageUrl = `${baseUrl}${imagePath}`
+      }
+
+      console.log('Product:', item.title, 'Image URL:', imageUrl) // Debug log
+
+      // Validate image URL
+      if (!imageUrl || imageUrl === '') {
+        console.warn('Warning: Empty image URL for product:', item.title)
+        imageUrl = `${baseUrl}/logo.png` // Fallback to logo
+      }
 
       return {
         price_data: {
@@ -31,6 +50,7 @@ export async function POST(request: NextRequest) {
           product_data: {
             name: item.title,
             images: [imageUrl],
+            description: item.title, // Add description for better product info
           },
           unit_amount: item.priceCents,
         },
