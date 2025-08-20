@@ -11,7 +11,7 @@ interface LegalModalProps {
 
 export function LegalModal({ isOpen, onClose }: LegalModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
-  const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver({ threshold: 0.1 })
+  const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 })
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
