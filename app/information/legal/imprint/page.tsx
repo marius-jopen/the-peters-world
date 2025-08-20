@@ -13,7 +13,7 @@ export default function ImprintPage() {
           <section>
             <h2>Company Information</h2>
             <div className="space-y-2">
-              <p><strong>Business Name:</strong> Peter's World</p>
+              <p><strong>Business Name:</strong> Peter&apos;s World</p>
               <p><strong>Owner:</strong> [Your Name]</p>
               <p><strong>Address:</strong> [Your Address]</p>
               <p><strong>Email:</strong> hello@peters-world.com</p>

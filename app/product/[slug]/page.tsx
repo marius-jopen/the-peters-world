@@ -11,6 +11,7 @@ import { Product } from '@/types'
 import productsData from '@/data/products.json'
 import { useCartStore } from '@/store/cart'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import { ProductCard } from '@/components/ProductCard'
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>
@@ -325,31 +326,9 @@ export default function ProductPage({ params }: ProductPageProps) {
           <h2 className="text-3xl font-light text-[#131313] mb-8 text-center">
             You might also like
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {relatedProducts.map((relatedProduct) => (
-              <div key={relatedProduct.id} className="text-center group">
-                <div className="relative aspect-square mb-4 overflow-hidden rounded-2xl">
-                  <Image
-                    src={relatedProduct.image}
-                    alt={relatedProduct.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                </div>
-                <h3 className="font-light text-[#131313] text-lg mb-2">
-                  {relatedProduct.title}
-                </h3>
-                <p className="text-lg text-gray-600 font-light mb-4">
-                  {formatPrice(relatedProduct.priceCents)}
-                </p>
-                <a
-                  href={`/product/${relatedProduct.slug}`}
-                  className="inline-block bg-gray-900 text-white font-medium px-6 py-3 rounded-full transition-all duration-300 hover:bg-gray-800 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  View Product
-                </a>
-              </div>
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}
           </div>
         </div>

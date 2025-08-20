@@ -35,7 +35,7 @@ export default function ShippingAndReturnsPage() {
           <section>
             <h2>Returns Policy</h2>
             <p>
-              We want you to be completely satisfied with your purchase. If you're not happy 
+              We want you to be completely satisfied with your purchase. If you&apos;re not happy 
               with your item, you can return it within 14 days of receipt.
             </p>
             
@@ -48,7 +48,7 @@ export default function ShippingAndReturnsPage() {
             
             <h3>Refund Process</h3>
             <p>
-              Once we receive your return, we'll inspect the item and process your refund 
+              Once we receive your return, we&apos;ll inspect the item and process your refund 
               within 5 business days. Refunds will be issued to your original payment method.
             </p>
           </section>

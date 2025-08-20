@@ -39,7 +39,7 @@ export default function InformationPage() {
         
         <Prose className="text-center mb-16">
           <p>
-            Everything you need to know about Peter's World, from shipping information 
+            Everything you need to know about Peter&apos;s World, from shipping information 
             to frequently asked questions.
           </p>
         </Prose>
