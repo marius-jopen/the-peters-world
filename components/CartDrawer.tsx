@@ -38,12 +38,12 @@ export function CartDrawer() {
         />
       )}
 
-      {/* Drawer */}
-      <div
-        className={`fixed right-0 top-0 h-full w-full max-w-md bg-white border-l border-gray-200 transform transition-transform duration-300 ease-in-out z-50 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
+                 {/* Drawer */}
+           <div
+             className={`fixed right-0 top-0 h-full w-full max-w-md bg-white border-l border-gray-200 transform transition-all duration-500 ease-out z-50 ${
+               isOpen ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-full opacity-0 scale-95'
+             }`}
+           >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">

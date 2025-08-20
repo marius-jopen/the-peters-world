@@ -41,23 +41,29 @@ export function LegalModal({ isOpen, onClose }: LegalModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black bg-opacity-50"
+        className={`absolute inset-0 bg-black transition-all duration-500 ease-out ${
+          isOpen ? 'bg-opacity-50 opacity-100' : 'bg-opacity-0 opacity-0'
+        }`}
         onClick={onClose}
       />
 
       {/* Modal */}
       <div
         ref={modalRef}
-        className="relative bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden animate-in slide-in-from-bottom-4 duration-500"
+        className={`relative bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden transition-all duration-500 ease-out ${
+          isOpen 
+            ? 'translate-y-0 opacity-100 scale-100' 
+            : 'translate-y-8 opacity-0 scale-95'
+        }`}
         tabIndex={-1}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full border border-gray-200"
+          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full border border-gray-200 hover:bg-black hover:border-black transition-colors duration-200 group"
           aria-label="Close modal"
         >
-          <X className="h-5 w-5" />
+          <X className="h-5 w-5 text-gray-700 group-hover:text-white transition-colors duration-200" />
         </button>
 
         {/* Content */}
