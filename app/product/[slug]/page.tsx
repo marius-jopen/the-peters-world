@@ -14,16 +14,31 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { ProductCard } from '@/components/ProductCard'
 
 interface ProductPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const { slug } = params
-  const products = productsData as any
-  const product = products.find((p: any) => p.slug === slug)
+  const [slug, setSlug] = useState<string>('')
+  const [product, setProduct] = useState<any>(null)
   const [quantity, setQuantity] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['details']))
+
+  useEffect(() => {
+    const getParams = async () => {
+      const resolvedParams = await params
+      setSlug(resolvedParams.slug)
+    }
+    getParams()
+  }, [params])
+
+  useEffect(() => {
+    if (slug) {
+      const products = productsData as any
+      const foundProduct = products.find((p: any) => p.slug === slug)
+      setProduct(foundProduct)
+    }
+  }, [slug])
   const addItem = useCartStore(state => state.addItem)
   const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 })
 
@@ -82,6 +97,8 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   // Get 3 related products (deterministic based on product slug to avoid hydration mismatch)
   const getRelatedProducts = () => {
+    if (!product) return []
+    const products = productsData as any
     const otherProducts = products.filter((p: any) => p.slug !== product.slug)
     // Use a deterministic sorting based on product slug to ensure server/client consistency
     const sorted = otherProducts.sort((a: any, b: any) => a.slug.localeCompare(b.slug))
@@ -89,6 +106,19 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   const relatedProducts = getRelatedProducts()
+
+  if (!product) {
+    return (
+      <Container>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading product...</p>
+          </div>
+        </div>
+      </Container>
+    )
+  }
 
   return (
     <Container size="xl" className="py-12">
