@@ -29,10 +29,14 @@
     "currency": "EUR",
     "category": "pillow",
     "image": "/products/pillow-1.jpg",
-    "description": "A beautiful collection of Peter postcards. Perfect for sending to friends or displaying.",
-    "details": ["Multiple motifs", "Matte finish", "High quality"],
-    "specs": { "Size": "A6", "Paper": "300 gsm" },
-    "shipping": "Ships in a small rigid envelope.",
+    "images": [
+      "/products/pillow-1.jpg",
+      "/products/pillow-2.jpg"
+    ],
+    "description": "A beautiful Peter pillow with whimsical illustrations. Perfect for adding character to any room.",
+    "details": ["Soft cotton blend", "Machine washable", "40x40 cm"],
+    "specs": { "Size": "40x40 cm", "Material": "Cotton blend" },
+    "shipping": "Ships in a protective bag.",
     "available": true
   },
   {

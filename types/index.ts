@@ -1,4 +1,4 @@
-export type ProductCategory = 'calendar' | 'postcards' | 'original'
+export type ProductCategory = 'calendar' | 'postcards' | 'original' | 'pillow'
 
 export type Product = {
   id: string
@@ -8,6 +8,7 @@ export type Product = {
   currency: 'EUR'
   category: ProductCategory
   image: string
+  images?: string[]
   description: string
   details?: string[]
   specs?: Record<string, string>

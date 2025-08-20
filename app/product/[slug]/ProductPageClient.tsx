@@ -25,6 +25,12 @@ export function ProductPageClient({ product }: ProductPageClientProps) {
 
   // Get all images for the product
   const getProductImages = () => {
+    // If product has an images array, use it
+    if (product.images && product.images.length > 0) {
+      return product.images
+    }
+    
+    // Fallback to single image
     const images = [product.image]
     
     // Add slideshow images for calendar
@@ -128,11 +134,11 @@ export function ProductPageClient({ product }: ProductPageClientProps) {
             {/* Image Thumbnails */}
             {images.length > 1 && (
               <div className="flex gap-2 justify-center">
-                {images.map((image, index) => (
+                {images.map((image: string, index: number) => (
                   <button
                     key={index}
                     onClick={() => goToImage(index)}
-                    className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${
+                    className={`w-16 h-16 rounded-lg overflow-hidden border-1 transition-all duration-300 hover:scale-105 ${
                       index === currentImageIndex 
                         ? 'border-gray-800 scale-105' 
                         : 'border-gray-200'
