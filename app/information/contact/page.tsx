@@ -1,5 +1,6 @@
 import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
+import Link from 'next/link'
 
 export default function ContactPage() {
   return (
@@ -13,8 +14,8 @@ export default function ContactPage() {
           <section>
             <h2>Get in Touch</h2>
             <p>
-              We'd love to hear from you! Whether you have a question about our products, 
-              need help with an order, or want to discuss a custom commission, please don't 
+              We&apos;d love to hear from you! Whether you have a question about our products, 
+              need help with an order, or want to discuss a custom commission, please don&apos;t 
               hesitate to reach out.
             </p>
           </section>
@@ -53,9 +54,9 @@ export default function ContactPage() {
           <section>
             <h2>Studio Location</h2>
             <p>
-              Peter's World is based in Germany, where we create, package, and ship all 
-              of our products. While we don't have a physical store open to the public, 
-              we're happy to arrange local pickup for orders in our area.
+              Peter&apos;s World is based in Germany, where we create, package, and ship all 
+              of our products. While we don&apos;t have a physical store open to the public, 
+              we&apos;re happy to arrange local pickup for orders in our area.
             </p>
           </section>
           
@@ -63,7 +64,7 @@ export default function ContactPage() {
             <h2>Business Hours</h2>
             <p>
               Our studio is open Monday through Friday, 9:00 AM to 6:00 PM Central European Time. 
-              We're closed on weekends and German public holidays.
+              We&apos;re closed on weekends and German public holidays.
             </p>
           </section>
           
@@ -74,12 +75,12 @@ export default function ContactPage() {
             <p className="text-gray-600 mb-4">
               Browse our collection of calendars, postcards, and original drawings.
             </p>
-            <a 
+            <Link 
               href="/"
               className="btn-primary inline-block"
             >
               Shop Now
-            </a>
+            </Link>
           </div>
         </Prose>
       </div>

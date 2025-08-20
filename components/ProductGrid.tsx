@@ -5,10 +5,9 @@ import { ProductCard } from './ProductCard'
 
 interface ProductGridProps {
   products: Product[]
-  onProductClick: (product: Product) => void
 }
 
-export function ProductGrid({ products, onProductClick }: ProductGridProps) {
+export function ProductGrid({ products }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <div className="text-center py-20">
@@ -23,7 +22,6 @@ export function ProductGrid({ products, onProductClick }: ProductGridProps) {
         <ProductCard
           key={product.id}
           product={product}
-          onClick={() => onProductClick(product)}
         />
       ))}
     </div>

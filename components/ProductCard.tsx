@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { Product } from '@/types'
 import { formatPrice } from '@/lib/currency'
 import { useCartStore } from '@/store/cart'
@@ -8,14 +9,14 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 interface ProductCardProps {
   product: Product
-  onClick: () => void
 }
 
-export function ProductCard({ product, onClick }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const addToCart = useCartStore(state => state.addItem)
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.2 })
+  const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.2 })
   
   const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
     e.stopPropagation()
     addToCart(product, 1)
   }
@@ -32,10 +33,10 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
       {/* Image Container with Hover CTA */}
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-4">
         {/* Clickable Image */}
-        <button
-          onClick={onClick}
-          className="w-full h-full"
-          aria-label={`Open ${product.title}`}
+        <Link
+          href={`/product/${product.slug}`}
+          className="block w-full h-full"
+          aria-label={`View ${product.title}`}
         >
           <Image
             src={product.image}
@@ -44,7 +45,7 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-        </button>
+        </Link>
         
         {/* CTA Button - Appears on Hover */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
@@ -60,9 +61,14 @@ export function ProductCard({ product, onClick }: ProductCardProps) {
       
       {/* Product Info */}
       <div className="text-center animate-in fade-in duration-500 delay-200">
-        <h3 className="font-light text-[#131313] text-lg">
-          {product.title}
-        </h3>
+        <Link 
+          href={`/product/${product.slug}`}
+          className="hover:text-gray-600 transition-colors duration-200"
+        >
+          <h3 className="font-light text-[#131313] text-lg">
+            {product.title}
+          </h3>
+        </Link>
         <p className="text-lg text-gray-600 font-light">
           {formatPrice(product.priceCents)}
         </p>
