@@ -51,7 +51,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
           <button
             onClick={handleAddToCart}
-            className="bg-white text-gray-900 font-medium px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-sm scale-95 group-hover:scale-100"
+            className="bg-black text-white font-medium px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-sm scale-95 group-hover:scale-100"
             aria-label={`Add ${product.title} to cart`}
           >
             Add to Cart

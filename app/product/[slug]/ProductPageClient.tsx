@@ -6,7 +6,7 @@ import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { QuantitySelector } from '@/components/QuantitySelector'
 import { formatPrice } from '@/lib/currency'
-import { ProductCard } from '@/components/ProductCard'
+// import { ProductCard } from '@/components/ProductCard'
 import { useCartStore } from '@/store/cart'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import productsData from '@/data/products.json'
@@ -80,10 +80,10 @@ export function ProductPageClient({ product }: ProductPageClientProps) {
     return sorted.slice(0, 3)
   }
 
-  const relatedProducts = getRelatedProducts()
+  // const relatedProducts = getRelatedProducts()
 
   return (
-    <Container size="xl" className="py-12">
+    <Container size="xl" className="pt-12 pb-2">
       <div 
         ref={contentRef}
         className={`transition-all duration-700 ${
@@ -95,12 +95,13 @@ export function ProductPageClient({ product }: ProductPageClientProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
           {/* Left: Image Gallery */}
           <div className="space-y-4">
-            <div className="relative aspect-square bg-white rounded-2xl shadow-sm overflow-hidden group">
+            <div className="relative w-full group">
               <Image
                 src={images[currentImageIndex] || product.image}
                 alt={`${product.title} - Image ${currentImageIndex + 1}`}
-                fill
-                className="object-cover"
+                width={800}
+                height={600}
+                className="w-full h-auto object-cover"
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -312,16 +313,16 @@ export function ProductPageClient({ product }: ProductPageClientProps) {
         </div>
 
         {/* Related Products Section */}
-        <div className="border-t border-gray-200 pt-16">
+        {/* <div className="border-t border-gray-200 pt-16">
           <h2 className="text-3xl font-light text-[#131313] mb-8 text-center text-4xl md:text-6xl font-light pb-10">
-            You might also like
+            You also might like
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {relatedProducts.map((relatedProduct: any) => (
               <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </Container>
   )
