@@ -34,20 +34,27 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   useEffect(() => {
     if (slug) {
+      console.log('Looking for slug:', slug)
       const products = productsData as any
+      console.log('Available products:', products)
       const foundProduct = products.find((p: any) => p.slug === slug)
-      setProduct(foundProduct)
+      console.log('Found product:', foundProduct)
+      if (foundProduct) {
+        setProduct(foundProduct)
+      } else {
+        // Product not found - redirect to 404
+        notFound()
+      }
     }
   }, [slug])
+  
   const addItem = useCartStore(state => state.addItem)
   const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 })
 
-  if (!product) {
-    notFound()
-  }
-
   // Get all images for the product
   const getProductImages = () => {
+    if (!product) return []
+    
     const images = [product.image]
     
     // Add slideshow images for calendar

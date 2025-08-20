@@ -48,29 +48,5 @@
     "specs": { "Size": "A6", "Paper": "300 gsm" },
     "shipping": "Ships in a small rigid envelope.",
     "available": true
-  },
-  {
-    "id": "orig-001",
-    "slug": "original-1",
-    "title": "Original Drawing 1",
-    "priceCents": 18000,
-    "currency": "EUR",
-    "category": "original",
-    "image": "/products/original-1.jpg",
-    "description": "Original Peter drawing, signed. One of a kind.",
-    "specs": { "Size": "210 by 297 mm", "Medium": "Mixed media" },
-    "available": true
-  },
-  {
-    "id": "orig-002",
-    "slug": "original-2",
-    "title": "Original Drawing 2",
-    "priceCents": 22000,
-    "currency": "EUR",
-    "category": "original",
-    "image": "/products/original-2.jpg",
-    "description": "Original Peter drawing, signed. One of a kind.",
-    "specs": { "Size": "297 by 420 mm", "Medium": "Mixed media" },
-    "available": true
   }
 ]
