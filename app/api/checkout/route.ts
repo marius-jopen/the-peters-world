@@ -13,18 +13,30 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Get the base URL for converting relative image paths to absolute URLs
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : process.env.NEXTAUTH_URL || 'http://localhost:3000'
+
     // Create line items for Stripe
-    const lineItems = items.map(item => ({
-      price_data: {
-        currency: 'eur',
-        product_data: {
-          name: item.title,
-          images: [item.image],
+    const lineItems = items.map(item => {
+      // Convert relative image path to absolute URL
+      const imageUrl = item.image.startsWith('http') 
+        ? item.image 
+        : `${baseUrl}${item.image}`
+
+      return {
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: item.title,
+            images: [imageUrl],
+          },
+          unit_amount: item.priceCents,
         },
-        unit_amount: item.priceCents,
-      },
-      quantity: item.quantity,
-    }))
+        quantity: item.quantity,
+      }
+    })
 
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
