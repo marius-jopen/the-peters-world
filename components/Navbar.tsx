@@ -73,14 +73,16 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-[#131313] hover:text-gray-600 transition-colors"
-            aria-label="Toggle mobile menu"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
+                           {/* Mobile menu button - Right side */}
+                 <div className="md:hidden">
+                   <button
+                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                     className="p-2 text-[#131313] hover:text-gray-600 transition-colors"
+                     aria-label="Toggle mobile menu"
+                   >
+                     <Menu className="h-6 w-6" />
+                   </button>
+                 </div>
         </div>
 
         {/* Mobile Navigation */}

@@ -7,6 +7,7 @@ import { ProductGrid } from '@/components/ProductGrid'
 import { ProductModal } from '@/components/ProductModal'
 import { Product } from '@/types'
 import productsData from '@/data/products.json'
+import petersData from '@/data/peters.json'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 export default function HomePage() {
@@ -61,6 +62,9 @@ export default function HomePage() {
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto font-light pt-4 pb-12">
           Calendars, postcards, and original drawings.
+        </p>
+        <p className="text-sm text-gray-400 max-w-md mx-auto font-light">
+          Featuring {petersData.length} unique Peters
         </p>
       </div>
 

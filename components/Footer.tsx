@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { useState } from 'react'
 import { LegalModal } from './LegalModal'
@@ -58,8 +60,12 @@ export function Footer() {
                  </div>
         </div>
       </div>
-      
 
+      {/* Legal Modal */}
+      <LegalModal 
+        isOpen={isLegalModalOpen}
+        onClose={() => setIsLegalModalOpen(false)}
+      />
     </footer>
   )
 }
