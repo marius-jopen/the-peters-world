@@ -1,0 +1,7 @@
+[
+  { "id": "attention", "name": "Attention", "image": "/peters/attention.png" },
+  { "id": "balance", "name": "Balance", "image": "/peters/balance.png" },
+  { "id": "ball-coming", "name": "Ball Coming", "image": "/peters/ball-coming.png" },
+  { "id": "balloon", "name": "Balloon", "image": "/peters/balloon.png" },
+  { "id": "banana-joe", "name": "Banana Joe", "image": "/peters/banana-joe.png" }
+]

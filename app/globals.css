@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'GT Pressura Mono';
+  src: url('/fonts/GT-Pressura-Mono-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Pressura Mono';
+  src: url('/fonts/GT-Pressura-Mono-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    font-family: 'GT Pressura Mono', monospace;
+  }
+
+  body {
+    background-color: #FAF7F2;
+    color: #131313;
+    font-family: 'GT Pressura Mono', monospace;
+    font-weight: 300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'GT Pressura Mono', monospace;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  p {
+    font-family: 'GT Pressura Mono', monospace;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-amber-500 hover:bg-amber-600 text-white font-medium px-6 py-3 rounded-2xl transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-900 font-medium px-6 py-3 rounded-2xl border border-gray-200 transition-colors;
+  }
+  
+  .filter-pill {
+    @apply px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer;
+  }
+  
+  .filter-pill-active {
+    @apply bg-amber-500 text-white;
+  }
+  
+  .filter-pill-inactive {
+    @apply bg-white text-gray-900 hover:bg-gray-50 border border-gray-200;
+  }
+}

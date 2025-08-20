@@ -1,0 +1,76 @@
+[
+  {
+    "id": "kal-2026",
+    "slug": "peters-world-calendar-2026",
+    "title": "Peter's World Calendar 2026",
+    "priceCents": 2495,
+    "currency": "EUR",
+    "category": "calendar",
+    "image": "/products/calendar-2026.jpg",
+    "description": "Twelve absurd scenes of Peter for the whole year. High quality print, limited run.",
+    "details": [
+      "A3 size",
+      "Sturdy paper stock",
+      "Printed in EU"
+    ],
+    "specs": {
+      "Size": "297 by 420 mm",
+      "Paper": "250 gsm uncoated",
+      "Binding": "Wire O"
+    },
+    "shipping": "Ships in a protective sleeve and cardboard mailer.",
+    "available": true
+  },
+  {
+    "id": "pc-set-01",
+    "slug": "postcard-set-1",
+    "title": "Postcard Set 1",
+    "priceCents": 1295,
+    "currency": "EUR",
+    "category": "postcards",
+    "image": "/products/postcard-set-1.jpg",
+    "description": "A beautiful collection of Peter postcards. Perfect for sending to friends or displaying.",
+    "details": ["Multiple motifs", "Matte finish", "High quality"],
+    "specs": { "Size": "A6", "Paper": "300 gsm" },
+    "shipping": "Ships in a small rigid envelope.",
+    "available": true
+  },
+  {
+    "id": "pc-set-02",
+    "slug": "postcard-set-2",
+    "title": "Postcard Set 2",
+    "priceCents": 1295,
+    "currency": "EUR",
+    "category": "postcards",
+    "image": "/products/postcard-set-2.jpg",
+    "description": "Another beautiful collection of Peter postcards. Perfect for sending to friends or displaying.",
+    "details": ["Multiple motifs", "Matte finish", "High quality"],
+    "specs": { "Size": "A6", "Paper": "300 gsm" },
+    "shipping": "Ships in a small rigid envelope.",
+    "available": true
+  },
+  {
+    "id": "orig-001",
+    "slug": "original-1",
+    "title": "Original Drawing 1",
+    "priceCents": 18000,
+    "currency": "EUR",
+    "category": "original",
+    "image": "/products/original-1.jpg",
+    "description": "Original Peter drawing, signed. One of a kind.",
+    "specs": { "Size": "210 by 297 mm", "Medium": "Mixed media" },
+    "available": true
+  },
+  {
+    "id": "orig-002",
+    "slug": "original-2",
+    "title": "Original Drawing 2",
+    "priceCents": 22000,
+    "currency": "EUR",
+    "category": "original",
+    "image": "/products/original-2.jpg",
+    "description": "Original Peter drawing, signed. One of a kind.",
+    "specs": { "Size": "297 by 420 mm", "Medium": "Mixed media" },
+    "available": true
+  }
+]
