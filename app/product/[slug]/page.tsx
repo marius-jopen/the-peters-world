@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -14,13 +14,13 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 import { ProductCard } from '@/components/ProductCard'
 
 interface ProductPageProps {
-  params: Promise<{ slug: string }>
+  params: { slug: string }
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const { slug } = use(params)
+  const { slug } = params
   const products = productsData as any
-  const product = products.find(p => p.slug === slug)
+  const product = products.find((p: any) => p.slug === slug)
   const [quantity, setQuantity] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['details']))
@@ -82,9 +82,9 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   // Get 3 related products (deterministic based on product slug to avoid hydration mismatch)
   const getRelatedProducts = () => {
-    const otherProducts = products.filter(p => p.slug !== product.slug)
+    const otherProducts = products.filter((p: any) => p.slug !== product.slug)
     // Use a deterministic sorting based on product slug to ensure server/client consistency
-    const sorted = otherProducts.sort((a, b) => a.slug.localeCompare(b.slug))
+    const sorted = otherProducts.sort((a: any, b: any) => a.slug.localeCompare(b.slug))
     return sorted.slice(0, 3)
   }
 
@@ -220,7 +220,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                   >
                     <div className="px-6 pb-4">
                       <ul className="space-y-2">
-                        {product.details.map((detail, index) => (
+                        {product.details.map((detail: any, index: number) => (
                           <li 
                             key={index} 
                             className="text-gray-600 transition-all duration-300"
@@ -262,7 +262,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                   >
                     <div className="px-6 pb-4">
                       <dl className="space-y-2">
-                        {Object.entries(product.specs).map(([key, value], index) => (
+                        {Object.entries(product.specs).map(([key, value]: [string, any], index: number) => (
                           <div 
                             key={key} 
                             className="flex justify-between transition-all duration-300"
@@ -327,7 +327,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             You might also like
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {relatedProducts.map((relatedProduct) => (
+            {relatedProducts.map((relatedProduct: any) => (
               <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}
           </div>
