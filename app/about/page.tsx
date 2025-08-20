@@ -18,7 +18,7 @@ export default function AboutPage() {
 
       {/* Content */}
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-8 text-center tracking-wide animate-in slide-in-from-top-8 duration-700">
+        <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-8 text-center text-4xl md:text-6xl font-light pb-10 tracking-wide animate-in slide-in-from-top-8 duration-700">
           About Peter&apos;s World
         </h1>
         

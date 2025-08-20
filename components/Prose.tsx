@@ -13,7 +13,7 @@ export function Prose({ children, className }: ProseProps) {
         'prose prose-lg max-w-none',
         'prose-headings:text-[#131313] prose-headings:font-bold',
         'prose-p:text-gray-600 prose-p:leading-relaxed',
-        'prose-a:text-amber-500 prose-a:no-underline hover:prose-a:underline',
+        'prose-a:text-[#131313] prose-a:no-underline hover:prose-a:underline',
         'prose-strong:text-[#131313] prose-strong:font-semibold',
         'prose-ul:text-gray-600 prose-li:marker:text-gray-400',
         className

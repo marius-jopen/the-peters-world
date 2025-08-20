@@ -33,7 +33,7 @@ export default function InformationPage() {
   return (
     <Container size="lg" className="py-12">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-8 text-center tracking-wide">
+        <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-8 text-center text-4xl md:text-6xl font-light pb-10 tracking-wide">
           Information
         </h1>
         

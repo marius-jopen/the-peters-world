@@ -323,7 +323,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
         {/* Related Products Section */}
         <div className="border-t border-gray-200 pt-16">
-          <h2 className="text-3xl font-light text-[#131313] mb-8 text-center">
+          <h2 className="text-3xl font-light text-[#131313] mb-8 text-center text-4xl md:text-6xl font-light pb-10">
             You might also like
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">

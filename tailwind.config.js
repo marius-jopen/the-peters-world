@@ -10,8 +10,8 @@ module.exports = {
       colors: {
         background: '#FAF7F2',
         foreground: '#131313',
-        primary: '#F59E0B',
-        'primary-dark': '#D97706',
+        primary: '#131313',
+        'primary-dark': '#000000',
       },
       fontFamily: {
         sans: ['GT Pressura Mono', 'monospace'],
