@@ -1,7 +1,13 @@
+'use client'
+
+import { useState } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
 
 export default function FAQPage() {
+  const [openFaqs, setOpenFaqs] = useState<Set<number>>(new Set())
+
   const faqs = [
     {
       question: "What is Peter's World?",
@@ -37,6 +43,16 @@ export default function FAQPage() {
     }
   ]
 
+  const toggleFaq = (index: number) => {
+    const newOpenFaqs = new Set(openFaqs)
+    if (newOpenFaqs.has(index)) {
+      newOpenFaqs.delete(index)
+    } else {
+      newOpenFaqs.add(index)
+    }
+    setOpenFaqs(newOpenFaqs)
+  }
+
   return (
     <Container size="md" className="py-12">
       <div className="max-w-3xl mx-auto">
@@ -44,15 +60,41 @@ export default function FAQPage() {
           Frequently Asked Questions
         </h1>
         
-        <Prose className="space-y-8">
+        <Prose className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="border-b border-gray-200 pb-6 last:border-b-0">
-              <h2 className="text-xl font-semibold text-[#131313] mb-3">
-                {faq.question}
-              </h2>
-              <p className="text-gray-600 leading-relaxed">
-                {faq.answer}
-              </p>
+            <div key={index} className="border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-300 transition-colors duration-200">
+              <button
+                onClick={() => toggleFaq(index)}
+                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+              >
+                <h2 className="text-xl font-semibold text-[#131313] pr-4">
+                  {faq.question}
+                </h2>
+                <div className="flex-shrink-0 transition-transform duration-300 ease-out">
+                  {openFaqs.has(index) ? (
+                    <ChevronUp className="h-5 w-5 text-gray-600" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-gray-600" />
+                  )}
+                </div>
+              </button>
+              
+              <div 
+                className={`overflow-hidden transition-all duration-300 ease-out ${
+                  openFaqs.has(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-6 pb-4">
+                  <p 
+                    className="text-gray-600 leading-relaxed transition-all duration-300"
+                    style={{ 
+                      transform: openFaqs.has(index) ? 'translateY(0)' : 'translateY(-10px)'
+                    }}
+                  >
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
           
@@ -65,7 +107,7 @@ export default function FAQPage() {
             </p>
             <a 
               href="/information/contact"
-              className="btn-primary inline-block"
+              className="btn-primary inline-block transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               Contact Us
             </a>

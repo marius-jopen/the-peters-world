@@ -63,9 +63,6 @@ export default function HomePage() {
         <p className="text-lg text-gray-500 max-w-xl mx-auto font-light pt-4 pb-12">
           Calendars, postcards, and original drawings.
         </p>
-        <p className="text-sm text-gray-400 max-w-md mx-auto font-light">
-          Featuring {petersData.length} unique Peters
-        </p>
       </div>
 
       {/* Product Grid */}

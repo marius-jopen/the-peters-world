@@ -38,12 +38,12 @@ export function CartDrawer() {
         />
       )}
 
-                 {/* Drawer */}
-           <div
-             className={`fixed right-0 top-0 h-full w-full max-w-md bg-white border-l border-gray-200 transform transition-transform duration-300 ease-out z-50 ${
-               isOpen ? 'translate-x-0' : 'translate-x-full'
-             }`}
-           >
+      {/* Drawer */}
+      <div
+        className={`fixed right-0 top-0 h-full w-96 bg-white border-l border-gray-200 transform transition-transform duration-300 ease-out z-50 ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -81,7 +81,7 @@ export function CartDrawer() {
                       <h3 className="font-medium text-[#131313] truncate">
                         {item.title}
                       </h3>
-                                              <p className="text-lg font-bold text-[#131313]">
+                      <p className="text-lg font-bold text-[#131313]">
                         {formatPrice(item.priceCents)}
                       </p>
                       

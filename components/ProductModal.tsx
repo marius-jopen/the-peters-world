@@ -20,8 +20,9 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   const [quantity, setQuantity] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['details']))
+  const [isClosing, setIsClosing] = useState(false)
   const addItem = useCartStore(state => state.addItem)
-  const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver({ threshold: 0.1 })
+  const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 })
 
   // Get all images for the product
   const getProductImages = () => {
@@ -55,21 +56,30 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
     }
   }
 
+  const handleClose = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      onClose()
+      setIsClosing(false)
+    }, 300)
+  }
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') handleClose()
     }
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape)
       document.body.style.overflow = 'hidden'
+      setIsClosing(false)
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = 'unset'
     }
-  }, [isOpen, onClose])
+  }, [isOpen])
 
   useEffect(() => {
     if (isOpen && modalRef.current) {
@@ -95,7 +105,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   const handleAddToCart = () => {
     if (product) {
       addItem(product, quantity)
-      onClose()
+      handleClose()
     }
   }
 
@@ -109,25 +119,25 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
       {/* Backdrop */}
       <div
         className={`absolute inset-0 bg-black transition-all duration-500 ease-out ${
-          isOpen ? 'bg-opacity-50 opacity-100' : 'bg-opacity-0 opacity-0'
+          isClosing ? 'bg-opacity-0 opacity-0' : 'bg-opacity-50 opacity-100'
         }`}
-        onClick={onClose}
+        onClick={handleClose}
       />
 
-              {/* Modal */}
-        <div
-          ref={modalRef}
-          className={`relative bg-white rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden transition-all duration-500 ease-out ${
-            isOpen 
-              ? 'translate-y-0 opacity-100 scale-100' 
-              : 'translate-y-8 opacity-0 scale-95'
-          }`}
-          tabIndex={-1}
-        >
+      {/* Modal */}
+      <div
+        ref={modalRef}
+        className={`relative bg-white rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden transition-all duration-500 ease-out ${
+          isClosing 
+            ? 'translate-y-8 opacity-0 scale-95' 
+            : 'translate-y-0 opacity-100 scale-100'
+        }`}
+        tabIndex={-1}
+      >
         {/* Close Button */}
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full border border-gray-200 hover:bg-black hover:border-black transition-colors duration-200 group"
+          onClick={handleClose}
+          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full border border-gray-200 hover:bg-black hover:border-black transition-all duration-200 group"
           aria-label="Close modal"
         >
           <X className="h-5 w-5 text-gray-700 group-hover:text-white transition-colors duration-200" />
@@ -144,26 +154,26 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
           {/* Left: Image Slideshow */}
           <div className="space-y-4">
             <div className="relative aspect-square group">
-                             <Image
-                 src={images[currentImageIndex] || product.image}
-                 alt={`${product.title} - Image ${currentImageIndex + 1}`}
-                 fill
-                 className="object-cover rounded-2xl"
-                 sizes="(max-width: 1024px) 100vw, 50vw"
-               />
+              <Image
+                src={images[currentImageIndex] || product.image}
+                alt={`${product.title} - Image ${currentImageIndex + 1}`}
+                fill
+                className="object-cover rounded-2xl"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
               
               {/* Navigation Arrows */}
               {images.length > 1 && (
                 <>
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 p-2 rounded-full border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 p-2 rounded-full border border-gray-200 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
                   >
                     <ChevronLeft className="h-6 w-6 text-gray-800" />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 p-2 rounded-full border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 p-2 rounded-full border border-gray-200 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110"
                   >
                     <ChevronRight className="h-6 w-6 text-gray-800" />
                   </button>
@@ -178,9 +188,9 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                   <button
                     key={index}
                     onClick={() => goToImage(index)}
-                    className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                    className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 hover:scale-105 ${
                       index === currentImageIndex 
-                        ? 'border-gray-800' 
+                        ? 'border-gray-800 scale-105' 
                         : 'border-gray-200'
                     }`}
                     title={`View image ${index + 1} of ${images.length}`}
@@ -226,92 +236,134 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 />
               </div>
               
-                                <button
-                    onClick={handleAddToCart}
-                    className="w-full bg-gray-900 text-white font-medium px-6 py-3 rounded-full"
-                  >
-                    Add to Cart
-                  </button>
+              <button
+                onClick={handleAddToCart}
+                className="w-full bg-gray-900 text-white font-medium px-6 py-3 rounded-full transition-all duration-300 hover:bg-gray-800 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Add to Cart
+              </button>
             </div>
 
             {/* Accordion Sections */}
             <div className="space-y-4">
               {/* Details */}
               {product.details && (
-                <div className="border border-gray-200 rounded-2xl">
+                <div className="border border-gray-200 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleSection('details')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
                   >
                     <span className="font-medium">Details</span>
-                    {openSections.has('details') ? (
-                      <ChevronUp className="h-5 w-5 transition-transform duration-300" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 transition-transform duration-300" />
-                    )}
+                    <div className="transition-transform duration-300 ease-out">
+                      {openSections.has('details') ? (
+                        <ChevronUp className="h-5 w-5" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5" />
+                      )}
+                    </div>
                   </button>
-                  {openSections.has('details') && (
-                    <div className="px-6 pb-4 animate-in slide-in-from-top-2 duration-300">
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-out ${
+                      openSections.has('details') ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 pb-4">
                       <ul className="space-y-2">
                         {product.details.map((detail, index) => (
-                          <li key={index} className="text-gray-600 animate-in fade-in duration-300" style={{ animationDelay: `${index * 100}ms` }}>
+                          <li 
+                            key={index} 
+                            className="text-gray-600 transition-all duration-300"
+                            style={{ 
+                              animationDelay: `${index * 50}ms`,
+                              transform: openSections.has('details') ? 'translateX(0)' : 'translateX(-10px)',
+                              opacity: openSections.has('details') ? 1 : 0
+                            }}
+                          >
                             • {detail}
                           </li>
                         ))}
                       </ul>
                     </div>
-                  )}
+                  </div>
                 </div>
               )}
 
               {/* Specs */}
               {product.specs && (
-                <div className="border border-gray-200 rounded-2xl">
+                <div className="border border-gray-200 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleSection('specs')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
                   >
                     <span className="font-medium">Specifications</span>
-                    {openSections.has('specs') ? (
-                      <ChevronUp className="h-5 w-5 transition-transform duration-300" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 transition-transform duration-300" />
-                    )}
+                    <div className="transition-transform duration-300 ease-out">
+                      {openSections.has('specs') ? (
+                        <ChevronUp className="h-5 w-5" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5" />
+                      )}
+                    </div>
                   </button>
-                  {openSections.has('specs') && (
-                    <div className="px-6 pb-4 animate-in slide-in-from-top-2 duration-300">
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-out ${
+                      openSections.has('specs') ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 pb-4">
                       <dl className="space-y-2">
                         {Object.entries(product.specs).map(([key, value], index) => (
-                          <div key={key} className="flex justify-between animate-in fade-in duration-300" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div 
+                            key={key} 
+                            className="flex justify-between transition-all duration-300"
+                            style={{ 
+                              animationDelay: `${index * 50}ms`,
+                              transform: openSections.has('specs') ? 'translateX(0)' : 'translateX(-10px)',
+                              opacity: openSections.has('specs') ? 1 : 0
+                            }}
+                          >
                             <dt className="font-medium text-gray-700">{key}:</dt>
                             <dd className="text-gray-600">{value}</dd>
                           </div>
                         ))}
                       </dl>
                     </div>
-                  )}
+                  </div>
                 </div>
               )}
 
               {/* Shipping */}
               {product.shipping && (
-                <div className="border border-gray-200 rounded-2xl">
+                <div className="border border-gray-200 rounded-2xl overflow-hidden">
                   <button
                     onClick={() => toggleSection('shipping')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
                   >
                     <span className="font-medium">Shipping</span>
-                    {openSections.has('shipping') ? (
-                      <ChevronUp className="h-5 w-5 transition-transform duration-300" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 transition-transform duration-300" />
-                    )}
-                  </button>
-                  {openSections.has('shipping') && (
-                    <div className="px-6 pb-4 animate-in slide-in-from-top-2 duration-300">
-                      <p className="text-gray-600 animate-in fade-in duration-300">{product.shipping}</p>
+                    <div className="transition-transform duration-300 ease-out">
+                      {openSections.has('shipping') ? (
+                        <ChevronUp className="h-5 w-5" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5" />
+                      )}
                     </div>
-                  )}
+                  </button>
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-out ${
+                      openSections.has('shipping') ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 pb-4">
+                      <p 
+                        className="text-gray-600 transition-all duration-300"
+                        style={{ 
+                          transform: openSections.has('shipping') ? 'translateX(0)' : 'translateX(-10px)',
+                          opacity: openSections.has('shipping') ? 1 : 0
+                        }}
+                      >
+                        {product.shipping}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
