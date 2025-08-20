@@ -23,7 +23,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-                            <h4 className="font-semibold text-[#131313] mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-[#131313] mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-600 hover:text-[#131313] transition-colors">
@@ -43,21 +43,46 @@ export function Footer() {
             </ul>
           </div>
 
-          
+          {/* Information */}
+          <div>
+            <h4 className="font-semibold text-[#131313] mb-4">Information</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/information/shipping-and-returns" className="text-gray-600 hover:text-[#131313] transition-colors">
+                  Shipping & Returns
+                </Link>
+              </li>
+              <li>
+                <Link href="/information/faq" className="text-gray-600 hover:text-[#131313] transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/information/contact" className="text-gray-600 hover:text-[#131313] transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/information/legal/imprint" className="text-gray-600 hover:text-[#131313] transition-colors">
+                  Legal
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-600 text-sm">
             © 2024 Peter&apos;s World. All rights reserved.
           </p>
-                           <div className="flex space-x-6 mt-4 md:mt-0">
-                   <button 
-                     onClick={() => setIsLegalModalOpen(true)}
-                     className="text-gray-600 hover:text-[#131313] text-sm transition-colors"
-                   >
-                     Legal Information
-                   </button>
-                 </div>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <button 
+              onClick={() => setIsLegalModalOpen(true)}
+              className="text-gray-600 hover:text-[#131313] text-sm transition-colors"
+            >
+              Legal Information
+            </button>
+          </div>
         </div>
       </div>
 

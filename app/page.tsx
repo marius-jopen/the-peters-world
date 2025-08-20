@@ -23,7 +23,7 @@ export default function HomePage() {
         }`}
       >
         <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-4 tracking-wide w-2/3 mx-auto pt-12">
-          Creative objects from Peter&apos;s World.
+          Cute things from Peter&apos;s World.
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto font-light pt-4 pb-12">
           Calendars, postcards, and original drawings.

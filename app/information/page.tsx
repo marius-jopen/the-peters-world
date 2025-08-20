@@ -33,30 +33,28 @@ export default function InformationPage() {
   return (
     <Container size="lg" className="py-12">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-headline font-bold text-[#131313] mb-8 text-center">
+        <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-8 text-center tracking-wide">
           Information
         </h1>
         
-        <Prose className="text-center mb-16">
-          <p>
-            Everything you need to know about Peter&apos;s World, from shipping information 
-            to frequently asked questions.
-          </p>
-        </Prose>
+        <p className="text-lg text-gray-500 max-w-xl mx-auto font-light text-center mb-16">
+          Everything you need to know about Peter&apos;s World, from shipping information 
+          to frequently asked questions.
+        </p>
 
         {/* Information Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {infoSections.map((section) => (
             <Link
               key={section.href}
               href={section.href}
-              className="group block p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-gray-200"
+              className="group block p-8 bg-white rounded-2xl border border-gray-200 hover:border-gray-300 transition-all duration-300"
             >
               <div className="text-4xl mb-4">{section.icon}</div>
-              <h2 className="text-xl font-semibold text-[#131313] mb-3 group-hover:text-amber-500 transition-colors">
+              <h2 className="text-xl font-light text-[#131313] mb-3 group-hover:text-gray-600 transition-colors">
                 {section.title}
               </h2>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed font-light">
                 {section.description}
               </p>
             </Link>
