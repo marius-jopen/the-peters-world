@@ -79,7 +79,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = 'unset'
     }
-  }, [isOpen])
+  }, [isOpen, handleClose])
 
   useEffect(() => {
     if (isOpen && modalRef.current) {

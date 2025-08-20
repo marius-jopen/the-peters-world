@@ -31,11 +31,11 @@ export default function FAQPage() {
     },
     {
       question: "How do I track my order?",
-      answer: "Once your order ships, you'll receive a confirmation email with tracking information. You can also contact us directly for order status updates."
+      answer: "Once your order ships, you&apos;ll receive a confirmation email with tracking information. You can also contact us directly for order status updates."
     },
     {
       question: "What if I'm not satisfied with my purchase?",
-      answer: "We offer a 14-day return policy for all items in original condition. If you're not completely satisfied, please contact us to arrange a return."
+      answer: "We offer a 14-day return policy for all items in original condition. If you&apos;re not completely satisfied, please contact us to arrange a return."
     },
     {
       question: "Are the calendars for specific years?",
@@ -103,7 +103,7 @@ export default function FAQPage() {
               Still have questions?
             </h2>
             <p className="text-gray-600 mb-4">
-              If you couldn't find the answer you're looking for, please don't hesitate to contact us.
+              If you couldn&apos;t find the answer you&apos;re looking for, please don&apos;t hesitate to contact us.
             </p>
             <a 
               href="/information/contact"

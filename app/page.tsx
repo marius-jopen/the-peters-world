@@ -15,7 +15,7 @@ export default function HomePage() {
   const router = useRouter()
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { ref: heroRef, isVisible: heroVisible } = useIntersectionObserver({ threshold: 0.3 })
+  const { ref: heroRef, isVisible: heroVisible } = useIntersectionObserver<HTMLDivElement>({ threshold: 0.3 })
 
   // Get products from data
   const products = productsData as any
@@ -24,7 +24,7 @@ export default function HomePage() {
   useEffect(() => {
     const productSlug = searchParams.get('product')
     if (productSlug) {
-      const product = products.find(p => p.slug === productSlug)
+      const product = products.find((p: any) => p.slug === productSlug)
       if (product) {
         setSelectedProduct(product)
         setIsModalOpen(true)
@@ -58,7 +58,7 @@ export default function HomePage() {
         }`}
       >
         <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-4 tracking-wide w-2/3 mx-auto pt-12">
-          Creative objects from Peter's World.
+          Creative objects from Peter&apos;s World.
         </h1>
         <p className="text-lg text-gray-500 max-w-xl mx-auto font-light pt-4 pb-12">
           Calendars, postcards, and original drawings.

@@ -9,7 +9,7 @@ export default function AboutPage() {
       <div className="relative aspect-[16/9] mb-12 rounded-2xl overflow-hidden">
         <Image
           src="/about/about.jpg"
-          alt="Peter's World"
+                      alt="Peter&apos;s World"
           fill
           className="object-cover"
           priority
@@ -19,13 +19,13 @@ export default function AboutPage() {
       {/* Content */}
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-light text-[#131313] mb-8 text-center tracking-wide animate-in slide-in-from-top-8 duration-700">
-          About Peter's World
+          About Peter&apos;s World
         </h1>
         
         <Prose>
           <p>
             Peter is a small, hairy, oddly lovable character who wanders through tiny everyday dramas. 
-            Peter's World collects these drawings as calendars, postcards, and sometimes original pieces.
+            Peter&apos;s World collects these drawings as calendars, postcards, and sometimes original pieces.
           </p>
           
           <p>
@@ -35,8 +35,8 @@ export default function AboutPage() {
           
           <p>
             The collection began as simple sketches and has grown into a celebration of the ordinary moments 
-            that make life special. Whether you're looking for a calendar to brighten your year, postcards 
-            to send to friends, or an original piece to treasure, Peter's World offers creative objects 
+            that make life special.             Whether you&apos;re looking for a calendar to brighten your year, postcards 
+            to send to friends, or an original piece to treasure, Peter&apos;s World offers creative objects 
             for endless imagination.
           </p>
         </Prose>
