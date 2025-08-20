@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Container } from '@/components/Container'
 import { QuantitySelector } from '@/components/QuantitySelector'
-import { AddToCartButton } from '@/components/AddToCartButton'
 import { formatPrice } from '@/lib/currency'
 import { Product } from '@/types'
 import productsData from '@/data/products.json'
@@ -14,12 +13,13 @@ import { useCartStore } from '@/store/cart'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 interface ProductPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
+  const { slug } = use(params)
   const products: Product[] = productsData
-  const product = products.find(p => p.slug === params.slug)
+  const product = products.find(p => p.slug === slug)
   const [quantity, setQuantity] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['details']))
@@ -79,11 +79,12 @@ export default function ProductPage({ params }: ProductPageProps) {
     addItem(product, quantity)
   }
 
-  // Get 3 random related products (excluding current product)
+  // Get 3 related products (deterministic based on product slug to avoid hydration mismatch)
   const getRelatedProducts = () => {
     const otherProducts = products.filter(p => p.slug !== product.slug)
-    const shuffled = otherProducts.sort(() => Math.random() - 0.5)
-    return shuffled.slice(0, 3)
+    // Use a deterministic sorting based on product slug to ensure server/client consistency
+    const sorted = otherProducts.sort((a, b) => a.slug.localeCompare(b.slug))
+    return sorted.slice(0, 3)
   }
 
   const relatedProducts = getRelatedProducts()
