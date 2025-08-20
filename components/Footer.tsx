@@ -1,8 +1,12 @@
 import Link from 'next/link'
+import { useState } from 'react'
+import { LegalModal } from './LegalModal'
 
 export function Footer() {
+  const [isLegalModalOpen, setIsLegalModalOpen] = useState(false)
+
   return (
-    <footer className="bg-white border-t border-gray-200 mt-20">
+    <footer className="bg-background border-t border-gray-200 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -44,11 +48,14 @@ export function Footer() {
           <p className="text-gray-600 text-sm">
             © 2024 Peter's World. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/about" className="text-gray-600 hover:text-[#131313] text-sm transition-colors">
-              Legal Information
-            </Link>
-          </div>
+                           <div className="flex space-x-6 mt-4 md:mt-0">
+                   <button 
+                     onClick={() => setIsLegalModalOpen(true)}
+                     className="text-gray-600 hover:text-[#131313] text-sm transition-colors"
+                   >
+                     Legal Information
+                   </button>
+                 </div>
         </div>
       </div>
       

@@ -38,7 +38,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[#131313] hover:text-gray-600 transition-colors"
+                className="text-[#131313]"
               >
                 {link.label}
               </Link>
@@ -47,21 +47,13 @@ export function Navbar() {
 
           {/* Logo - Centered */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link href="/" className="flex items-center font-gt-mono">
+            <Link href="/" className="flex items-center font-gt-mono animate-in slide-in-from-top-4 duration-500">
               <img src="/logo.png" alt="Peter's World" className="h-16 w-auto" />
             </Link>
           </div>
 
-          {/* Right side - Account and Cart */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Account placeholder */}
-            <Link
-              href="/about"
-              className="text-[#131313] hover:text-gray-600 transition-colors"
-            >
-              Account
-            </Link>
-
+          {/* Right side - Cart only */}
+          <div className="hidden md:flex items-center">
             {/* Cart */}
             <button
               onClick={() => {
@@ -74,7 +66,7 @@ export function Navbar() {
             >
               <ShoppingCart className="h-6 w-6" />
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-amber-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-gray-900 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {itemCount}
                 </span>
               )}
@@ -105,13 +97,7 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/about"
-                className="text-[#131313] hover:text-gray-600 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Account
-              </Link>
+
             </div>
           </div>
         )}

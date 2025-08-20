@@ -50,7 +50,7 @@ export default function InformationPage() {
             <Link
               key={section.href}
               href={section.href}
-              className="group block p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-gray-200"
+              className="group block p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-gray-200"
             >
               <div className="text-4xl mb-4">{section.icon}</div>
               <h2 className="text-xl font-semibold text-[#131313] mb-3 group-hover:text-amber-500 transition-colors">

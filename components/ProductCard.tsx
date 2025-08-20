@@ -3,6 +3,8 @@
 import Image from 'next/image'
 import { Product } from '@/types'
 import { formatPrice } from '@/lib/currency'
+import { useCartStore } from '@/store/cart'
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 interface ProductCardProps {
   product: Product
@@ -10,30 +12,61 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onClick }: ProductCardProps) {
+  const addToCart = useCartStore(state => state.addItem)
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.2 })
+  
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    addToCart(product, 1)
+  }
+  
   return (
-    <button
-      onClick={onClick}
-      className="group text-left bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-      aria-label={`View ${product.title}`}
+    <div 
+      ref={ref}
+      className={`text-left group transition-all duration-700 ${
+        isVisible 
+          ? 'translate-y-0 opacity-100' 
+          : 'translate-y-4 opacity-100'
+      }`}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-t-2xl">
-        <Image
-          src={product.image}
-          alt={product.title}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+      {/* Image Container with Hover CTA */}
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-4">
+        {/* Clickable Image */}
+        <button
+          onClick={onClick}
+          className="w-full h-full"
+          aria-label={`Open ${product.title}`}
+        >
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </button>
+        
+        {/* CTA Button - Appears on Hover */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          <button
+            onClick={handleAddToCart}
+            className="bg-white text-gray-900 font-medium px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-sm scale-95 group-hover:scale-100"
+            aria-label={`Add ${product.title} to cart`}
+          >
+            Add to Cart
+          </button>
+        </div>
       </div>
       
-      <div className="p-6">
-        <h3 className="font-light text-[#131313] text-lg mb-1 group-hover:text-amber-500 transition-colors">
+      {/* Product Info */}
+      <div className="text-center animate-in fade-in duration-500 delay-200">
+        <h3 className="font-light text-[#131313] text-lg">
           {product.title}
         </h3>
         <p className="text-lg text-gray-600 font-light">
           {formatPrice(product.priceCents)}
         </p>
       </div>
-    </button>
+    </div>
   )
 }

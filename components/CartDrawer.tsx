@@ -40,7 +40,7 @@ export function CartDrawer() {
 
       {/* Drawer */}
       <div
-        className={`fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed right-0 top-0 h-full w-full max-w-md bg-white border-l border-gray-200 transform transition-transform duration-300 ease-in-out z-50 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -50,7 +50,7 @@ export function CartDrawer() {
             <h2 className="text-xl font-semibold text-[#131313]">Shopping Cart</h2>
             <button
               onClick={handleClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="p-2 rounded-full"
               aria-label="Close cart"
             >
               <X className="h-5 w-5" />
@@ -92,7 +92,7 @@ export function CartDrawer() {
                         />
                         <button
                           onClick={() => handleRemoveItem(item.id)}
-                          className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
+                          className="p-2 text-red-500 rounded-full"
                           aria-label="Remove item"
                         >
                           <Trash2 className="h-4 w-4" />

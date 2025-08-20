@@ -7,6 +7,7 @@ import { Product } from '@/types'
 import { formatPrice } from '@/lib/currency'
 import { QuantitySelector } from './QuantitySelector'
 import { useCartStore } from '@/store/cart'
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 interface ProductModalProps {
   product: Product | null
@@ -20,27 +21,23 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(['details']))
   const addItem = useCartStore(state => state.addItem)
+  const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver({ threshold: 0.1 })
 
   // Get all images for the product
   const getProductImages = () => {
     if (!product) return []
-    
+
     const images = [product.image]
     
     // Add slideshow images for calendar
     if (product.category === 'calendar' && product.slug === 'peters-world-calendar-2026') {
       images.push('/products/calendar-2026-slide-1.jpg')
-      images.push('/products/calendar-2026-slide-2.jpg')
+      images.push('/products/calendar-2026-slide-1.jpg')
       images.push('/products/calendar-2026-slide-3.jpg')
     }
     
-    // Debug: log the images array
-    console.log('Product images:', images)
-    
     return images
   }
-
-  const images = getProductImages()
 
   const nextImage = () => {
     if (images.length <= 1) return
@@ -88,10 +85,8 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   }, [product])
 
   const toggleSection = (section: string) => {
-    const newOpenSections = new Set(openSections)
-    if (newOpenSections.has(section)) {
-      newOpenSections.delete(section)
-    } else {
+    const newOpenSections = new Set<string>()
+    if (!openSections.has(section)) {
       newOpenSections.add(section)
     }
     setOpenSections(newOpenSections)
@@ -106,6 +101,9 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
 
   if (!isOpen || !product) return null
 
+  // Get images for this specific product
+  const images = getProductImages()
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
@@ -114,45 +112,52 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
         onClick={onClose}
       />
 
-      {/* Modal */}
-      <div
-        ref={modalRef}
-        className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
-        tabIndex={-1}
-      >
+              {/* Modal */}
+        <div
+          ref={modalRef}
+          className="relative bg-white rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden animate-in zoom-in-95 duration-300"
+          tabIndex={-1}
+        >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-50 transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full border border-gray-200"
           aria-label="Close modal"
         >
           <X className="h-5 w-5" />
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
+        <div 
+          ref={contentRef}
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 pb-10 pt-2 transition-all duration-700 ${
+            contentVisible 
+              ? 'translate-y-0 opacity-100' 
+              : 'translate-y-4 opacity-100'
+          }`}
+        >
           {/* Left: Image Slideshow */}
           <div className="space-y-4">
-            <div className="relative aspect-square">
-              <Image
-                src={images[currentImageIndex]}
-                alt={`${product.title} - Image ${currentImageIndex + 1}`}
-                fill
-                className="object-cover rounded-2xl"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <div className="relative aspect-square group">
+                             <Image
+                 src={images[currentImageIndex] || product.image}
+                 alt={`${product.title} - Image ${currentImageIndex + 1}`}
+                 fill
+                 className="object-cover rounded-2xl"
+                 sizes="(max-width: 1024px) 100vw, 50vw"
+               />
               
               {/* Navigation Arrows */}
               {images.length > 1 && (
                 <>
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 p-2 rounded-full border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
                     <ChevronLeft className="h-6 w-6 text-gray-800" />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 p-2 rounded-full border border-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
                     <ChevronRight className="h-6 w-6 text-gray-800" />
                   </button>
@@ -169,8 +174,8 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                     onClick={() => goToImage(index)}
                     className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
                       index === currentImageIndex 
-                        ? 'border-amber-500' 
-                        : 'border-gray-200 hover:border-gray-300'
+                        ? 'border-gray-800' 
+                        : 'border-gray-200'
                     }`}
                     title={`View image ${index + 1} of ${images.length}`}
                   >
@@ -215,12 +220,12 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 />
               </div>
               
-              <button
-                onClick={handleAddToCart}
-                className="w-full btn-primary"
-              >
-                Add to Cart
-              </button>
+                                <button
+                    onClick={handleAddToCart}
+                    className="w-full bg-gray-900 text-white font-medium px-6 py-3 rounded-full"
+                  >
+                    Add to Cart
+                  </button>
             </div>
 
             {/* Accordion Sections */}
@@ -230,20 +235,22 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <div className="border border-gray-200 rounded-2xl">
                   <button
                     onClick={() => toggleSection('details')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between"
                   >
                     <span className="font-medium">Details</span>
                     {openSections.has('details') ? (
-                      <ChevronUp className="h-5 w-5" />
+                      <ChevronUp className="h-5 w-5 transition-transform duration-300" />
                     ) : (
-                      <ChevronDown className="h-5 w-5" />
+                      <ChevronDown className="h-5 w-5 transition-transform duration-300" />
                     )}
                   </button>
                   {openSections.has('details') && (
-                    <div className="px-6 pb-4">
+                    <div className="px-6 pb-4 animate-in slide-in-from-top-2 duration-300">
                       <ul className="space-y-2">
                         {product.details.map((detail, index) => (
-                          <li key={index} className="text-gray-600">• {detail}</li>
+                          <li key={index} className="text-gray-600 animate-in fade-in duration-300" style={{ animationDelay: `${index * 100}ms` }}>
+                            • {detail}
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -256,20 +263,20 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <div className="border border-gray-200 rounded-2xl">
                   <button
                     onClick={() => toggleSection('specs')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between"
                   >
                     <span className="font-medium">Specifications</span>
                     {openSections.has('specs') ? (
-                      <ChevronUp className="h-5 w-5" />
+                      <ChevronUp className="h-5 w-5 transition-transform duration-300" />
                     ) : (
-                      <ChevronDown className="h-5 w-5" />
+                      <ChevronDown className="h-5 w-5 transition-transform duration-300" />
                     )}
                   </button>
                   {openSections.has('specs') && (
-                    <div className="px-6 pb-4">
+                    <div className="px-6 pb-4 animate-in slide-in-from-top-2 duration-300">
                       <dl className="space-y-2">
-                        {Object.entries(product.specs).map(([key, value]) => (
-                          <div key={key} className="flex justify-between">
+                        {Object.entries(product.specs).map(([key, value], index) => (
+                          <div key={key} className="flex justify-between animate-in fade-in duration-300" style={{ animationDelay: `${index * 100}ms` }}>
                             <dt className="font-medium text-gray-700">{key}:</dt>
                             <dd className="text-gray-600">{value}</dd>
                           </div>
@@ -285,18 +292,18 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                 <div className="border border-gray-200 rounded-2xl">
                   <button
                     onClick={() => toggleSection('shipping')}
-                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    className="w-full px-6 py-4 text-left flex items-center justify-between"
                   >
                     <span className="font-medium">Shipping</span>
                     {openSections.has('shipping') ? (
-                      <ChevronUp className="h-5 w-5" />
+                      <ChevronUp className="h-5 w-5 transition-transform duration-300" />
                     ) : (
-                      <ChevronDown className="h-5 w-5" />
+                      <ChevronDown className="h-5 w-5 transition-transform duration-300" />
                     )}
                   </button>
                   {openSections.has('shipping') && (
-                    <div className="px-6 pb-4">
-                      <p className="text-gray-600">{product.shipping}</p>
+                    <div className="px-6 pb-4 animate-in slide-in-from-top-2 duration-300">
+                      <p className="text-gray-600 animate-in fade-in duration-300">{product.shipping}</p>
                     </div>
                   )}
                 </div>
