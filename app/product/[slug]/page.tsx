@@ -19,7 +19,7 @@ interface ProductPageProps {
 
 export default function ProductPage({ params }: ProductPageProps) {
   const { slug } = use(params)
-  const products: Product[] = productsData
+  const products = productsData as any
   const product = products.find(p => p.slug === slug)
   const [quantity, setQuantity] = useState(1)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
