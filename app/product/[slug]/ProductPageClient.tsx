@@ -95,7 +95,7 @@ export function ProductPageClient({ product }: ProductPageClientProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
           {/* Left: Image Gallery */}
           <div className="space-y-4">
-            <div className="relative w-full group">
+            <div className="relative w-full group rounded-2xl overflow-hidden">
               <Image
                 src={images[currentImageIndex] || product.image}
                 alt={`${product.title} - Image ${currentImageIndex + 1}`}

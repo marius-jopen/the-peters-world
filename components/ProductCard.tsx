@@ -31,7 +31,7 @@ export function ProductCard({ product }: ProductCardProps) {
       }`}
     >
       {/* Image Container with Hover CTA */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-4">
+      <div className="relative aspect-square overflow-hidden rounded-2xl mb-4">
         {/* Clickable Image */}
         <Link
           href={`/product/${product.slug}`}
@@ -42,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
             src={product.image}
             alt={product.title}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover aspect-square transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </Link>
