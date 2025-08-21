@@ -44,7 +44,7 @@ export function CartDrawer() {
 
       {/* Drawer */}
       <div
-        className={`fixed right-0 top-0 h-full w-96 bg-white border-l border-gray-200 transform transition-transform duration-300 ease-out z-50 ${
+        className={`fixed right-0 top-0 h-full w-96 bg-background border-l border-gray-200 transform transition-transform duration-300 ease-out z-50 ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
