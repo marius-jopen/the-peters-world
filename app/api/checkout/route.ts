@@ -71,8 +71,8 @@ export async function POST(request: NextRequest) {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${process.env.STRIPE_SUCCESS_URL}?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: process.env.STRIPE_CANCEL_URL || 'http://localhost:3000',
+      success_url: process.env.STRIPE_SUCCESS_URL || `${baseUrl}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: process.env.STRIPE_CANCEL_URL || `${baseUrl}/something-went-wrong`,
       metadata: {
         items: JSON.stringify(items.map(item => ({
           id: item.id,
