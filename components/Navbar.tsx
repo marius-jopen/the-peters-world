@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useCartStore } from '@/store/cart'
 import { ShoppingCart, Menu } from 'lucide-react'
 import { useState, useEffect } from 'react'
@@ -52,7 +53,7 @@ export function Navbar() {
           {/* Logo - Centered on desktop, left on mobile */}
           <div className="md:absolute md:left-1/2 md:transform md:-translate-x-1/2">
             <Link href="/" className="flex items-center font-gt-mono animate-in slide-in-from-top-4 duration-500">
-              <img src="/logo.png" alt="Peter's World" className="h-16 w-auto" />
+              <Image src="/logo.png" alt="Peter's World" width={64} height={64} className="h-16 w-auto" />
             </Link>
           </div>
 

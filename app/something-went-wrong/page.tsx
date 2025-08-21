@@ -25,7 +25,7 @@ export default function SomethingWentWrongPage() {
           
           <div className="max-w-2xl mx-auto space-y-6">
             <p className="text-xl text-gray-600 leading-relaxed">
-              It looks like there was an issue with your checkout. Don't worry, your payment hasn't been processed.
+              It looks like there was an issue with your checkout. Don&apos;t worry, your payment hasn&apos;t been processed.
             </p>
             
             <p className="text-lg text-gray-600 leading-relaxed">

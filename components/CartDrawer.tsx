@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { X, Trash2 } from 'lucide-react'
+import Image from 'next/image'
 import { useCartStore } from '@/store/cart'
 import { formatPrice } from '@/lib/currency'
 import { QuantitySelector } from './QuantitySelector'
@@ -73,10 +74,12 @@ export function CartDrawer() {
                   <div key={item.id} className="flex gap-4 p-4 bg-gray-50 rounded-2xl">
                     {/* Item Image */}
                     <div className="relative w-20 h-20 flex-shrink-0">
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.title}
-                        className="w-full h-full object-cover rounded-xl"
+                        fill
+                        className="object-cover rounded-xl"
+                        sizes="80px"
                       />
                     </div>
 

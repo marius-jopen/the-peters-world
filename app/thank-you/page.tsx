@@ -29,8 +29,8 @@ export default function ThankYouPage() {
             </p>
             
             <p className="text-lg text-gray-600 leading-relaxed">
-              You'll receive a confirmation email shortly with your order details. 
-              We'll ship your Peter's World items as soon as possible.
+              You&apos;ll receive a confirmation email shortly with your order details. 
+              We&apos;ll ship your Peter&apos;s World items as soon as possible.
             </p>
             
             <div className="pt-8">
