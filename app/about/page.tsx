@@ -6,9 +6,9 @@ export default function AboutPage() {
   return (
     <Container size="lg" className="py-12">
       {/* Hero Image */}
-      <div className="relative aspect-[16/9] mb-12 rounded-2xl overflow-hidden">
+      <div className="relative aspect-[20/10] mb-12 rounded-3xl overflow-hidden">
         <Image
-          src="/about/about.jpg"
+          src="/about/eyes.gif"
                       alt="Peter&apos;s World"
           fill
           className="object-cover"
