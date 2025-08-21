@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [itemCount, setItemCount] = useState(0)
+  const [isHydrated, setIsHydrated] = useState(false)
   
   // Use useEffect to avoid hydration mismatch
   useEffect(() => {
@@ -18,6 +19,9 @@ export function Navbar() {
     const unsubscribe = useCartStore.subscribe((state) => {
       setItemCount(state.getItemCount())
     })
+    
+    // Mark as hydrated after component mounts
+    setIsHydrated(true)
     
     return unsubscribe
   }, [])
@@ -54,7 +58,7 @@ export function Navbar() {
 
           {/* Right side - Cart and Mobile Menu */}
           <div className="flex items-center space-x-2 ml-auto">
-            {/* Cart - Hidden on mobile */}
+            {/* Cart - Hidden on mobile (now handled by floating cart button) */}
             <div className="hidden md:block">
               <button
                 onClick={() => {
@@ -66,7 +70,7 @@ export function Navbar() {
                 aria-label="Open cart"
               >
                 <ShoppingCart className="h-6 w-6" />
-                {itemCount > 0 && (
+                {isHydrated && itemCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-gray-900 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {itemCount}
                   </span>

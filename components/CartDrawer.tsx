@@ -9,11 +9,15 @@ import { CheckoutButton } from './CheckoutButton'
 
 export function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false)
-  const { items, removeItem, updateQuantity, getTotal } = useCartStore()
+  const [isHydrated, setIsHydrated] = useState(false)
+  const { items, removeItem, updateQuantity, getTotal, getItemCount } = useCartStore()
 
   useEffect(() => {
     const handleOpenCart = () => setIsOpen(true)
     window.addEventListener('openCart', handleOpenCart)
+    
+    // Mark as hydrated after component mounts
+    setIsHydrated(true)
     
     return () => window.removeEventListener('openCart', handleOpenCart)
   }, [])
@@ -117,6 +121,37 @@ export function CartDrawer() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Floating Cart Button - Mobile Only */}
+      <div className="md:hidden fixed bottom-6 right-6 z-40">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="relative bg-[#131313] text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-200 hover:scale-105 active:scale-95"
+          aria-label="Open shopping cart"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0h9"
+            />
+          </svg>
+          
+          {/* Cart Badge */}
+          {isHydrated && getItemCount() > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-medium">
+              {getItemCount()}
+            </span>
+          )}
+        </button>
       </div>
     </>
   )
