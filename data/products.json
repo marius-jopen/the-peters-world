@@ -28,10 +28,9 @@
     "priceCents": 1295,
     "currency": "EUR",
     "category": "pillow",
-    "image": "/products/pillow-1.jpg",
+    "image": "/products/pillow-3.png",
     "images": [
-      "/products/pillow-1.jpg",
-      "/products/pillow-2.jpg"
+      "/products/pillow-3.png"
     ],
     "description": "A beautiful Peter pillow with whimsical illustrations. Perfect for adding character to any room.",
     "details": ["Soft cotton blend", "Machine washable", "40x40 cm"],
